@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>EBLAN RADIO STATION</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: white
+            font-family: Arial, Sans-Serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .player-card {
+            background: #1e1e1e;
+            display: inline-block;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="player-card">
+        <h1>Radio stream</h1>
+        <p>right from my home</p>
+        
+        <audio controls autoplay style="width: 100%; margin-top: 20px;">
+            <source src="http://26.198.249.195:8000/stream" type="audio/mpeg">
+        </audio>
+    </div>
+    
+</body>
+</html>
