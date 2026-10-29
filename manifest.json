@@ -1,0 +1,17 @@
+{
+  "name": "Кузинар",
+  "short_name": "Кузинар",
+  "description": "Книга рецептов для тех, кто учится готовить",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "ru",
+  "background_color": "#f6f8f4",
+  "theme_color": "#2e6b3f",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
