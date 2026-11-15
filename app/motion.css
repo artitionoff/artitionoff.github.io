@@ -1,0 +1,49 @@
+/* Кузинар: анимации в духе Material Expressive (пружинная физика, живые формы) */
+:root{--spring:cubic-bezier(.34,1.56,.64,1);--smooth:cubic-bezier(.2,0,0,1)}
+
+@keyframes rise{from{opacity:0;transform:translateY(24px) scale(.95)}to{opacity:1;transform:none}}
+@keyframes pop{0%{transform:scale(.8)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+
+/* Формы покрупнее и круглее */
+.card{border-radius:22px}
+.btn{border-radius:999px;padding:14px 18px}
+input,select,textarea{border-radius:16px}
+.chips button{border-radius:999px}
+.chips button.on{border-radius:12px;animation:pop .45s var(--spring)}
+
+/* Нажатие: пружинит и меняет форму */
+.card,.btn,.chips button,nav button{transition:transform .4s var(--spring),border-radius .4s var(--spring),background-color .25s var(--smooth),color .3s var(--smooth);-webkit-tap-highlight-color:transparent}
+.card:active{transform:scale(.97);border-radius:30px}
+.btn:active{transform:scale(.94)}
+.chips button:active{transform:scale(.9)}
+nav button:active{transform:scale(.92)}
+
+/* Появление: карточки списка по очереди */
+.v-list .in .card{animation:rise .6s var(--spring) both}
+.v-list .in .card:nth-child(2){animation-delay:.05s}
+.v-list .in .card:nth-child(3){animation-delay:.1s}
+.v-list .in .card:nth-child(4){animation-delay:.15s}
+.v-list .in .card:nth-child(5){animation-delay:.2s}
+.v-list .in .card:nth-child(6){animation-delay:.25s}
+.v-list .in .card:nth-child(n+7){animation-delay:.3s}
+
+/* Появление: экран рецепта и форма, блок за блоком */
+.v-open>*,.v-add>*{animation:rise .55s var(--spring) both}
+.v-open>*:nth-child(2),.v-add>*:nth-child(2){animation-delay:.04s}
+.v-open>*:nth-child(3),.v-add>*:nth-child(3){animation-delay:.08s}
+.v-open>*:nth-child(4),.v-add>*:nth-child(4){animation-delay:.12s}
+.v-open>*:nth-child(5),.v-add>*:nth-child(5){animation-delay:.16s}
+.v-open>*:nth-child(6),.v-add>*:nth-child(6){animation-delay:.2s}
+.v-open>*:nth-child(7),.v-add>*:nth-child(7){animation-delay:.24s}
+.v-open>*:nth-child(n+8),.v-add>*:nth-child(n+8){animation-delay:.28s}
+#ings .row,#steps .in-s{animation:rise .45s var(--spring) both}
+
+/* Нижнее меню: «таблетка» выезжает под активной вкладкой */
+nav{isolation:isolate}
+nav button{position:relative}
+nav button::before{content:"";position:absolute;left:50%;top:8px;bottom:8px;width:86%;background:var(--lemon);border-radius:999px;z-index:-1;opacity:0;transform:translateX(-50%) scale(.4);transition:transform .5s var(--spring),opacity .25s var(--smooth)}
+nav button.on{box-shadow:none;color:var(--ink)}
+nav button.on::before{opacity:.6;transform:translateX(-50%) scale(1)}
+
+/* Если у человека в телефоне отключена анимация, уважаем это */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

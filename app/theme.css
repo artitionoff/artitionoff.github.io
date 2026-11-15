@@ -1,0 +1,35 @@
+/* Кузинар: тёмная тема и кнопка-переключатель */
+header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+
+.tt{position:relative;flex:none;width:42px;height:42px;border-radius:50%;border:0;padding:0;display:grid;place-items:center;background:rgba(255,255,255,.18);color:#fff;-webkit-tap-highlight-color:transparent;transition:transform .4s var(--spring,ease),background-color .25s}
+.tt:active{transform:scale(.86) rotate(-12deg)}
+.tt svg{grid-area:1/1;transition:transform .6s var(--spring,ease),opacity .3s}
+/* светлая тема: показываем луну (нажмёшь, станет тёмно) */
+.tt .i-sun{opacity:0;transform:rotate(-120deg) scale(.3)}
+.tt .i-moon{opacity:1;transform:none}
+:root[data-theme="dark"] .tt .i-sun{opacity:1;transform:none}
+:root[data-theme="dark"] .tt .i-moon{opacity:0;transform:rotate(120deg) scale(.3)}
+
+/* плавная смена цветов при переключении */
+body,header,nav,input,select,textarea{transition:background-color .4s,color .4s,border-color .4s}
+.card,.chips button{transition:transform .4s var(--spring,ease),border-radius .4s var(--spring,ease),background-color .4s,color .4s,border-color .4s}
+
+/* тёмная палитра */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#111713;--ink:#e7eee8;--mute:#9db0a2;--green:#3b8a55;--lemon:#f2c94c;--line:#2b382e;--card:#1a231d;
+}
+:root[data-theme="dark"] header{background:#1c3d27}
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] textarea{background:var(--card);color:var(--ink);border-color:var(--line)}
+:root[data-theme="dark"] ::placeholder{color:var(--mute);opacity:1}
+:root[data-theme="dark"] .chips button{background:var(--card);color:var(--ink)}
+:root[data-theme="dark"] .chips button.on{background:var(--green);color:#fff;border-color:var(--green)}
+:root[data-theme="dark"] nav{background:var(--card);border-top-color:var(--line)}
+:root[data-theme="dark"] nav button{color:var(--mute)}
+:root[data-theme="dark"] nav button.on{color:#1d2a21}
+:root[data-theme="dark"] nav button.on::before{opacity:.92}
+:root[data-theme="dark"] .btn.alt{color:#1d2a21}
+:root[data-theme="dark"] .btn.del{background:transparent;color:#ff8f86;border-color:#ff8f86}
+:root[data-theme="dark"] .msg{color:#ff8f86}
