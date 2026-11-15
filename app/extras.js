@@ -29,12 +29,12 @@
     if (code.charAt(0) === "z") return pipe(fromB64(code.slice(1)), new DecompressionStream("deflate-raw")).then(function (b) { return JSON.parse(new TextDecoder().decode(b)); });
     return Promise.resolve(JSON.parse(new TextDecoder().decode(fromB64(code))));
   }
-  function pack(r, withPhoto) { var o = { t: r.title, c: r.category, m: r.time, s: r.servings, l: r.level, i: r.ingredients.map(function (x) { return [x.name, x.amount, x.unit]; }), p: r.steps }; if (withPhoto && r.photo) o.f = r.photo; return o; }
+  function pack(r, withPhoto) { var o = { t: r.title, c: r.category, m: r.time, s: r.servings, l: r.level, i: r.ingredients.map(function (x) { return [x.name, x.amount, x.unit, x.k100 || 0]; }), p: r.steps }; if (withPhoto && r.photo) o.f = r.photo; return o; }
   function unpack(o) {
     if (!o || typeof o.t !== "string" || !Array.isArray(o.i) || !Array.isArray(o.p)) throw 0;
     var r = { id: "my" + Date.now() + Math.floor(Math.random() * 1000), title: o.t.slice(0, 120), category: CATS.indexOf(o.c) > -1 ? o.c : "Другое",
       time: +o.m || 0, servings: +o.s || 1, level: ["Легко", "Средне", "Сложно"].indexOf(o.l) > -1 ? o.l : "Легко",
-      ingredients: o.i.slice(0, 60).map(function (x) { return { name: String(x[0] || "").slice(0, 120), amount: String(x[1] || "").slice(0, 30), unit: String(x[2] || "").slice(0, 30) }; }).filter(function (x) { return x.name; }),
+      ingredients: o.i.slice(0, 60).map(function (x) { return { name: String(x[0] || "").slice(0, 120), amount: String(x[1] || "").slice(0, 30), unit: String(x[2] || "").slice(0, 30), k100: +x[3] > 0 && +x[3] < 1000 ? +x[3] : undefined }; }).filter(function (x) { return x.name; }),
       steps: o.p.slice(0, 60).map(function (s) { return String(s).slice(0, 1000); }).filter(Boolean) };
     if (typeof o.f === "string" && o.f.length < 600000 && /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(o.f)) r.photo = o.f;
     return r;
