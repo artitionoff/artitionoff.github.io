@@ -3,6 +3,7 @@
   "short_name": "Кузинар",
   "description": "Книга рецептов для тех, кто постоянно забывает рецепты",
   "start_url": "./index.html",
+  "id": "/app/",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
