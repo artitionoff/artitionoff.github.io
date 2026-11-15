@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Кузинар — книга рецептов для тех, кто постоянно забывает рецепты</title>
+<meta name="description" content="Кузинар — книга рецептов: готовые блюда на каждый день, свои рецепты по шаблону, автоматический подсчёт калорий. Скачайте альфа-версию для Android с GitHub Releases.">
+<link rel="canonical" href="https://artitionoff.github.io/cuzinar/">
+<meta name="theme-color" content="#2e6b3f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Кузинар — книга рецептов для тех, кто постоянно забывает рецепты">
+<meta property="og:description" content="Готовить умеете, а рецепты забываете? Кузинар помнит их за вас. Альфа для Android уже в Releases.">
+<meta property="og:url" content="https://artitionoff.github.io/cuzinar/">
+<meta property="og:locale" content="ru_RU">
+<link rel="icon" type="image/png" href="../app/icon-192.png">
+
+<!-- Тема: тот же ключ и значения, что в приложении, поэтому выбор общий для сайта и приложения -->
+<script>
+(function () {
+  var d = false;
+  try { var s = localStorage.getItem('cz_theme'); d = s ? s === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; } catch (e) {}
+  document.documentElement.setAttribute('data-theme', d ? 'dark' : 'light');
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Что такое Кузинар и для кого он?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Кузинар — книга рецептов для тех, кто постоянно забывает рецепты. Готовить вы умеете, но не помните, сколько класть и в каком порядке. Приложение хранит рецепты, чтобы их не нужно было держать в голове."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Кузинар научит меня готовить?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет, и не пытается. Он решает другую задачу: помнить рецепты за вас. Если вы понимаете, что такое «обжарить лук», но каждый раз гуглите пропорции, вам сюда."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Какие рецепты уже есть в приложении?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "В альфе шесть готовых блюд на каждый день: омлет, паста с томатным соусом, гречка рассыпчатая, паста карбонара, сырники и пирог жюльен. Их можно искать и фильтровать по категориям: завтрак, обед, ужин, гарнир, десерт. Набор будет расти."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как добавить свой рецепт?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Откройте вкладку «Свой рецепт» и заполните шаблон: название, категория, время, число порций, сложность, ингредиенты и шаги. По желанию добавьте фото блюда."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Где хранятся мои рецепты? Видит ли их кто-то ещё?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Только на вашем телефоне. Аккаунта и регистрации нет, рецепты никуда не отправляются. Если удалить приложение или очистить его данные, рецепты исчезнут вместе с ними, поэтому важные лучше сохранить файлом через «Поделиться»."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как считаются калории?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Кузинар считает только калории, без белков, жиров и углеводов. Приложение находит ингредиенты в своей базе продуктов, а на экране рецепта показывает калорийность порции и каждого ингредиента. Значения ориентировочные и считаются по сырым продуктам. Если продукта нет в базе, в своём рецепте можно указать калории на 100 г."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Можно ли поделиться рецептом?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Да. Рецепт можно отправить текстом, ссылкой, текстом с фото или файлом. Ссылка откроется в Кузинаре и добавит рецепт сама. Принять рецепт можно по ссылке, коду или файлу: «Свой рецепт» и затем «Импорт»."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Работает ли Кузинар без интернета?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Да. После первого запуска приложение сохраняет нужные файлы на телефоне, и рецепты открываются без сети."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как установить приложение на Android?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Скачайте файл .apk со страницы Releases, откройте его на телефоне, разрешите установку из этого источника (Android спросит сам) и нажмите «Установить». Затем запустите Кузинар с экрана приложений."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Безопасно ли ставить APK не из магазина?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ставьте файл только со страницы Releases официального репозитория этого сайта: другим копиям доверять не стоит. Предупреждение Android о неизвестных источниках появляется для любого приложения вне Google Play. После установки разрешение можно снова отключить в настройках."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Есть ли версия для iPhone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Пока нет. Сейчас доступна альфа-версия в виде .apk для Android, а в браузере приложение можно открыть на любом устройстве. В планах релизы в App Store, Google Play и RuStore, сроков пока нет."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Что значит «альфа-версия»?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Это ранний тест: основа уже работает, но возможны ошибки, а функции и внешний вид будут меняться. Если что-то сломалось или неудобно, напишите об этом."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Где сообщить об ошибке или предложить идею?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Откройте обращение в разделе Issues репозитория на GitHub: опишите, что произошло, на каком телефоне и в какой версии."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Будут ли видео к рецептам?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Фото к своим рецептам уже можно добавлять. Короткие видео мы обдумываем, но в альфе их нет."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+/* ───────── Палитра и шрифты — как в приложении ───────── */
+:root {
+  --bg: #f6f8f4; --ink: #1d2a21; --mute: #5d6b61;
+  --green: #2e6b3f; --lemon: #f2c94c; --line: #d9e0d5; --card: #fff;
+  --head: #2e6b3f;
+  --spring: cubic-bezier(.34, 1.56, .64, 1);
+  --smooth: cubic-bezier(.2, 0, 0, 1);
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111713; --ink: #e7eee8; --mute: #9db0a2;
+  --green: #3b8a55; --lemon: #f2c94c; --line: #2b382e; --card: #1a231d;
+  --head: #1c3d27;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.5 system-ui, sans-serif;
+  transition: background-color .4s, color .4s;
+}
+h1, h2, h3 { font-family: Georgia, serif; margin: 0; line-height: 1.15; }
+p { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--lemon); outline-offset: 3px; border-radius: 10px; }
+.wrap { width: min(1080px, 100% - 32px); margin-inline: auto; }
+
+/* ───────── Кнопки (как .btn в приложении) ───────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .55em;
+  min-height: 54px; padding: 14px 26px;
+  background: var(--green); color: #fff; border: 0; border-radius: 999px;
+  font: inherit; font-size: 17px; text-decoration: none; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .4s var(--spring), background-color .25s var(--smooth), color .3s var(--smooth);
+}
+.btn:hover { transform: scale(1.04); }
+.btn:active { transform: scale(.94); }
+.btn.alt { background: var(--lemon); color: #1d2a21; }
+.btn.line { background: transparent; color: inherit; box-shadow: inset 0 0 0 2px currentColor; }
+.btn svg { width: 22px; height: 22px; flex: none; }
+
+/* ───────── Шапка (зелёная, как в приложении) ───────── */
+header.top {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--head); color: #fff;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 0 10px;
+  transition: background-color .4s;
+}
+header.top .wrap { display: flex; align-items: center; gap: 12px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+.logo img { width: 36px; height: 36px; border-radius: 10px; }
+.logo span { font: 26px Georgia, serif; font-weight: 700; }
+.nav { display: flex; gap: 4px; margin-left: auto; }
+.nav a { color: #fff; opacity: .9; text-decoration: none; padding: 8px 14px; border-radius: 999px; transition: background-color .25s, transform .4s var(--spring); }
+.nav a:hover { background: rgba(255,255,255,.18); }
+.nav a:active { transform: scale(.92); }
+/* Кнопка темы: копия .tt из приложения */
+.tt { position: relative; flex: none; width: 42px; height: 42px; border-radius: 50%; border: 0; padding: 0; display: grid; place-items: center; background: rgba(255,255,255,.18); color: #fff; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform .4s var(--spring), background-color .25s; }
+.tt:active { transform: scale(.86) rotate(-12deg); }
+.tt svg { grid-area: 1/1; transition: transform .6s var(--spring), opacity .3s; }
+.tt .i-sun { opacity: 0; transform: rotate(-120deg) scale(.3); }
+.tt .i-moon { opacity: 1; transform: none; }
+:root[data-theme="dark"] .tt .i-sun { opacity: 1; transform: none; }
+:root[data-theme="dark"] .tt .i-moon { opacity: 0; transform: rotate(120deg) scale(.3); }
+
+/* ───────── Анимации приложения ───────── */
+@keyframes rise { from { opacity: 0; transform: translateY(24px) scale(.95); } to { opacity: 1; transform: none; } }
+@keyframes pop { 0% { transform: scale(.8); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
+.hero .wrap > div:first-child > * { animation: rise .6s var(--spring) both; }
+.hero .wrap > div:first-child > :nth-child(2) { animation-delay: .05s; }
+.hero .wrap > div:first-child > :nth-child(3) { animation-delay: .1s; }
+.hero .wrap > div:first-child > :nth-child(4) { animation-delay: .15s; }
+.hero .wrap > div:first-child > :nth-child(5) { animation-delay: .2s; }
+.reveal.js-off { opacity: 0; transform: translateY(24px) scale(.95); }
+.reveal.in { animation: rise .6s var(--spring) both; }
+
+/* ───────── Hero ───────── */
+.hero { padding: clamp(32px, 6vw, 72px) 0 clamp(48px, 7vw, 88px); overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+.badge { display: inline-block; background: var(--lemon); color: #1d2a21; padding: 6px 14px; border-radius: 999px; font-weight: 600; font-size: 14px; animation: pop .45s var(--spring) .3s both; }
+h1.big { font-size: clamp(2.1rem, 5vw, 3.6rem); font-weight: 700; margin: 18px 0; letter-spacing: -.01em; }
+.lead { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--mute); max-width: 34em; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.cta-meta { margin-top: 14px; color: var(--mute); font-size: 14px; min-height: 1.5em; }
+
+.stage { position: relative; display: grid; place-items: center; }
+.stage::before { content: ""; position: absolute; width: 78%; aspect-ratio: 1; border-radius: 46% 54% 50% 50% / 52% 46% 54% 48%; background: var(--lemon); opacity: .85; transform: rotate(-8deg); }
+.stage::after { content: ""; position: absolute; width: 30%; aspect-ratio: 1; border-radius: 50%; background: var(--green); left: 2%; bottom: 6%; opacity: .9; }
+.phone { position: relative; z-index: 1; width: min(280px, 72vw); padding: 8px; background: #1d2a21; border-radius: 40px; box-shadow: 0 24px 48px -16px rgba(0,0,0,.4); animation: rise .8s var(--spring) .15s both; }
+.phone img { border-radius: 32px; width: 100%; }
+:root[data-theme="dark"] .s-light { display: none; }
+:root:not([data-theme="dark"]) .s-dark { display: none; }
+
+/* ───────── Секции ───────── */
+section { padding: clamp(40px, 6vw, 80px) 0; }
+h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); }
+.sec-head { max-width: 38rem; margin-bottom: clamp(24px, 4vw, 44px); }
+.sec-head p { margin-top: 12px; color: var(--mute); font-size: 1.1rem; }
+
+.statement { padding-block: clamp(24px, 4vw, 48px); }
+.statement p { font: clamp(1.45rem, 3.4vw, 2.5rem)/1.3 Georgia, serif; max-width: 26em; }
+.statement small { display: block; margin-top: 18px; font: 17px/1.55 system-ui, sans-serif; color: var(--mute); max-width: 38em; }
+
+/* Карточки — как .card в приложении, но крупнее */
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 22px 22px 24px; transition: transform .4s var(--spring), border-radius .4s var(--spring), background-color .4s, border-color .4s; }
+.card:hover { border-radius: 30px; transform: translateY(-3px); }
+.card h3 { font-size: 21px; margin-bottom: 8px; }
+.card p { color: var(--mute); }
+.card.wide { grid-column: span 2; }
+.card.lemon { background: var(--lemon); border-color: var(--lemon); color: #1d2a21; }
+.card.lemon p { color: #3b4a3f; }
+.card.green { background: var(--green); border-color: var(--green); color: #fff; }
+.card.green p { color: rgba(255,255,255,.88); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.tags span { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 4px 12px; font-size: 14px; }
+.card.green .tags span { background: rgba(255,255,255,.14); border-color: transparent; }
+.kpill { margin-top: 14px; background: #fff; color: #1d2a21; border-radius: 18px; padding: 10px 14px; }
+.kpill b { font-size: 18px; }
+.kpill small { display: block; color: #5d6b61; }
+
+/* Показ экранов */
+.show { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 64px); align-items: center; margin-bottom: clamp(32px, 6vw, 64px); }
+.show.flip .stage { order: 2; }
+.show .stage::before { width: 70%; }
+.show h3 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 12px; }
+.show p { color: var(--mute); font-size: 1.1rem; max-width: 30em; }
+.show ul { margin: 14px 0 0; padding-left: 20px; color: var(--mute); }
+.show li { margin-bottom: 4px; }
+
+/* Скачать */
+.get { background: var(--head); color: #fff; border-radius: 32px; padding: clamp(24px, 5vw, 56px); display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(24px, 5vw, 56px); transition: background-color .4s; }
+.get h2 { color: #fff; }
+.get .lead { color: rgba(255,255,255,.88); margin-top: 12px; }
+.rel { margin-top: 14px; font-size: 14px; color: rgba(255,255,255,.85); min-height: 1.5em; }
+.how { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; align-content: center; counter-reset: s; }
+.how li { counter-increment: s; display: flex; gap: 14px; align-items: flex-start; background: rgba(255,255,255,.12); padding: 16px 18px; border-radius: 22px; }
+.how li::before { content: counter(s); flex: none; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--lemon); color: #1d2a21; font: 700 16px Georgia, serif; }
+.how b { display: block; }
+.how span { opacity: .85; font-size: 15px; }
+
+/* Планы */
+.road { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.stop.now { border-color: var(--green); box-shadow: inset 0 3px 0 var(--lemon); }
+.tag { display: inline-block; margin-bottom: 10px; padding: 3px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; background: var(--line); color: var(--ink); }
+.stop.now .tag { background: var(--lemon); color: #1d2a21; }
+.ideas { margin-top: 14px; padding: 18px 22px; border-radius: 22px; border: 2px dashed var(--line); color: var(--mute); }
+.ideas b { color: var(--ink); }
+
+/* FAQ */
+.faq-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(24px, 5vw, 64px); align-items: start; }
+.faq-grid .sec-head { position: sticky; top: 96px; margin: 0; }
+.qa { background: var(--card); border: 1px solid var(--line); border-radius: 22px; margin-bottom: 10px; transition: border-color .25s, background-color .4s; }
+.qa[open] { border-color: var(--green); }
+.qa summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; font-weight: 600; border-radius: 22px; }
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary i { flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--lemon); position: relative; transition: transform .5s var(--spring); }
+.qa summary i::before, .qa summary i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2.5px; background: #1d2a21; border-radius: 2px; transform: translate(-50%, -50%); }
+.qa summary i::after { transform: translate(-50%, -50%) rotate(90deg); }
+.qa[open] summary i { transform: rotate(135deg); }
+.ans { padding: 0 20px 18px; color: var(--mute); }
+.qa[open] .ans { animation: rise .45s var(--spring) both; }
+.ans a { color: var(--green); font-weight: 600; }
+:root[data-theme="dark"] .ans a { color: #7fcf98; }
+
+footer { border-top: 1px solid var(--line); padding: 32px 0 calc(40px + env(safe-area-inset-bottom, 0px)); color: var(--mute); font-size: 15px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; }
+footer nav { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--green); text-decoration: underline; }
+
+/* ───────── Адаптив ───────── */
+@media (max-width: 860px) {
+  .hero .wrap, .get, .faq-grid, .show { grid-template-columns: 1fr; }
+  .show.flip .stage { order: 0; }
+  .grid, .road { grid-template-columns: 1fr; }
+  .card.wide { grid-column: auto; }
+  .faq-grid .sec-head { position: static; }
+  .stage { margin-top: 8px; }
+}
+@media (max-width: 600px) {
+  .nav { display: none; }
+  header.top .wrap { justify-content: space-between; }
+  .btn { width: 100%; }
+  .get { border-radius: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal.js-off { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Кузинар — в начало страницы">
+      <img src="../app/icon-192.png" alt="" width="36" height="36">
+      <span>Кузинар</span>
+    </a>
+    <nav class="nav" aria-label="Разделы страницы">
+      <a href="#features">Возможности</a>
+      <a href="#download">Скачать</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <button class="tt" id="tt" type="button" aria-label="Сменить тему">
+      <svg class="i-sun" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <span class="badge">Альфа · Android</span>
+      <h1 class="big">Книга рецептов для тех, кто постоянно забывает рецепты</h1>
+      <p class="lead">Вы умеете готовить, но не помните, сколько класть и в каком порядке. Кузинар помнит это за вас: рецепты на каждый день уже внутри, свои добавляются по шаблону, а калории считаются сами.</p>
+      <div class="cta">
+        <a class="btn" href="https://github.com/artitionoff/artitionoff.github.io/releases" data-apk>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>
+          <span data-apk-label>Скачать APK</span>
+        </a>
+        <a class="btn alt" href="../app/">Открыть в браузере</a>
+      </div>
+      <p class="cta-meta" id="hero-meta">Скачивается со страницы Releases на GitHub</p>
+    </div>
+    <div class="stage">
+      <div class="phone">
+        <img class="s-light" src="img/list-light.webp" width="780" height="1560" alt="Экран приложения Кузинар: список рецептов с калорийностью порции">
+        <img class="s-dark" src="img/list-dark.webp" width="780" height="1560" alt="Экран приложения Кузинар в тёмной теме: список рецептов">
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="statement">
+  <div class="wrap reveal">
+    <p>Дело не в том, что вы не умеете готовить. Дело в том, что рецепт опять вылетел из головы.
+      <small>Пропорции теста, время для макарон, порядок шагов. Кузинар хранит всё это в одном месте, в том виде, в каком удобно читать у плиты.</small>
+    </p>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Что умеет Кузинар</h2>
+      <p>Всё, что нужно у плиты, и ничего лишнего.</p>
+    </div>
+    <div class="grid">
+      <article class="card wide reveal">
+        <h3>Рецепты на каждый день уже внутри</h3>
+        <p>Омлет, паста, гречка, карбонара, сырники, пирог жюльен. Ищите по названию или фильтруйте по категории, а любимые блюда складывайте в избранное.</p>
+        <div class="tags"><span>Завтрак</span><span>Обед</span><span>Ужин</span><span>Гарнир</span><span>Десерт</span></div>
+      </article>
+      <article class="card lemon reveal">
+        <h3>Калории считаются сами</h3>
+        <p>Для каждого блюда видно калорийность порции и каждого ингредиента.</p>
+        <div class="kpill"><b>≈ 526 ккал на порцию</b><small>Паста с томатным соусом</small></div>
+      </article>
+      <article class="card reveal">
+        <h3>Свои рецепты по шаблону</h3>
+        <p>Название, категория, время, порции, сложность, ингредиенты, шаги и фото блюда. Все записи выглядят одинаково.</p>
+      </article>
+      <article class="card reveal">
+        <h3>Подсказки продуктов</h3>
+        <p>Начните вводить ингредиент, и Кузинар предложит продукт из базы на 231 позицию и сразу покажет калории. Нет продукта в базе? Укажите калории на 100 г.</p>
+      </article>
+      <article class="card reveal">
+        <h3>Делитесь рецептами</h3>
+        <p>Отправляйте рецепт текстом, ссылкой, картинкой с фото или файлом. Получатель добавит его себе одним действием.</p>
+      </article>
+      <article class="card green wide reveal">
+        <h3>Всё на вашем телефоне</h3>
+        <p>Без аккаунта и регистрации. Ваши рецепты хранятся только на устройстве, а после первого запуска приложение открывается и без интернета. Тёмная тема переключается кнопкой в шапке.</p>
+      </article>
+      <article class="card reveal">
+        <h3>Пружинные анимации</h3>
+        <p>Карточки пружинят при нажатии, списки появляются по очереди. Если на телефоне отключена анимация, Кузинар это учтёт.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="show">
+      <div class="reveal">
+        <h3>Открыли рецепт — всё на одном экране</h3>
+        <p>Калорийность порции, ингредиенты с калориями и шаги по порядку. Никаких лишних переходов.</p>
+        <ul><li>≈ ккал на порцию и всего</li><li>Калории у каждого ингредиента</li><li>Кнопки «В избранное» и «Поделиться»</li></ul>
+      </div>
+      <div class="stage">
+        <div class="phone">
+          <img class="s-light" src="img/recipe-light.webp" width="780" height="1560" loading="lazy" alt="Экран рецепта в Кузинаре: калории порции, ингредиенты и кнопки">
+          <img class="s-dark" src="img/recipe-dark.webp" width="780" height="1560" loading="lazy" alt="Экран рецепта в Кузинаре в тёмной теме">
+        </div>
+      </div>
+    </div>
+    <div class="show flip">
+      <div class="reveal">
+        <h3>Добавляете своё — калории считаются на лету</h3>
+        <p>Заполните шаблон: пока вы вводите ингредиенты, под ними появляется подсказка с калорийностью.</p>
+        <ul><li>Фото блюда</li><li>Импорт чужого рецепта по ссылке, коду или файлу</li><li>Единицы: граммы, ложки, стаканы, штуки и другие</li></ul>
+      </div>
+      <div class="stage">
+        <div class="phone">
+          <img class="s-light" src="img/add-light.webp" width="780" height="1560" loading="lazy" alt="Форма добавления своего рецепта с подсказками калорий">
+          <img class="s-dark" src="img/add-dark.webp" width="780" height="1560" loading="lazy" alt="Форма добавления своего рецепта в тёмной теме">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap">
+    <div class="get reveal">
+      <div>
+        <h2>Скачайте альфу для Android</h2>
+        <p class="lead">Файл .apk лежит в разделе Releases на GitHub. Скачайте, установите и расскажите, чего не хватает.</p>
+        <div class="cta">
+          <a class="btn alt" href="https://github.com/artitionoff/artitionoff.github.io/releases" data-apk>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>
+            <span data-apk-label>Скачать APK</span>
+          </a>
+          <a class="btn line" href="https://github.com/artitionoff/artitionoff.github.io/releases">Все релизы</a>
+        </div>
+        <p class="rel" id="rel-meta">Ищем последнюю версию…</p>
+      </div>
+      <ol class="how">
+        <li><div><b>Скачайте файл .apk</b><span>С этой страницы или из Releases на GitHub.</span></div></li>
+        <li><div><b>Разрешите установку</b><span>Android спросит про установку из браузера или файлового менеджера. Подтвердите.</span></div></li>
+        <li><div><b>Откройте Кузинар</b><span>Выберите блюдо из готовых или добавьте своё.</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Что дальше</h2>
+      <p>Начинаем с Android, потом расширяемся.</p>
+    </div>
+    <div class="road">
+      <article class="card stop now reveal"><span class="tag">Сейчас</span><h3>Альфа для Android</h3><p>Файл .apk в Releases и веб-версия в браузере. Основа готова, остальное дорабатывается по отзывам.</p></article>
+      <article class="card stop reveal"><span class="tag">Дальше</span><h3>Бета-версия</h3><p>Больше готовых рецептов и доработки по вашим замечаниям.</p></article>
+      <article class="card stop reveal"><span class="tag">Потом</span><h3>Магазины приложений</h3><p>Google Play, RuStore и App Store, чтобы устанавливать Кузинар в пару касаний.</p></article>
+    </div>
+    <div class="ideas reveal"><b>Обдумываем:</b> короткие видео к рецептам. В альфе их нет.</div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap faq-grid">
+    <div class="sec-head reveal">
+      <h2>Частые вопросы</h2>
+      <p>Не нашли ответ? Напишите в Issues на GitHub, и мы добавим его сюда.</p>
+    </div>
+    <div>
+<details class="qa"><summary><span>Что такое Кузинар и для кого он?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Кузинар — книга рецептов для тех, кто постоянно забывает рецепты. Готовить вы умеете, но не помните, сколько класть и в каком порядке. Приложение хранит рецепты, чтобы их не нужно было держать в голове.</p></div></details>
+<details class="qa"><summary><span>Кузинар научит меня готовить?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Нет, и не пытается. Он решает другую задачу: помнить рецепты за вас. Если вы понимаете, что такое «обжарить лук», но каждый раз гуглите пропорции, вам сюда.</p></div></details>
+<details class="qa"><summary><span>Какие рецепты уже есть в приложении?</span><i aria-hidden="true"></i></summary><div class="ans"><p>В альфе шесть готовых блюд на каждый день: омлет, паста с томатным соусом, гречка рассыпчатая, паста карбонара, сырники и пирог жюльен. Их можно искать и фильтровать по категориям: завтрак, обед, ужин, гарнир, десерт. Набор будет расти.</p></div></details>
+<details class="qa"><summary><span>Как добавить свой рецепт?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Откройте вкладку «Свой рецепт» и заполните шаблон: название, категория, время, число порций, сложность, ингредиенты и шаги. По желанию добавьте фото блюда.</p></div></details>
+<details class="qa"><summary><span>Где хранятся мои рецепты? Видит ли их кто-то ещё?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Только на вашем телефоне. Аккаунта и регистрации нет, рецепты никуда не отправляются. Если удалить приложение или очистить его данные, рецепты исчезнут вместе с ними, поэтому важные лучше сохранить файлом через «Поделиться».</p></div></details>
+<details class="qa"><summary><span>Как считаются калории?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Кузинар считает только калории, без белков, жиров и углеводов. Приложение находит ингредиенты в своей базе продуктов, а на экране рецепта показывает калорийность порции и каждого ингредиента. Значения ориентировочные и считаются по сырым продуктам. Если продукта нет в базе, в своём рецепте можно указать калории на 100 г.</p></div></details>
+<details class="qa"><summary><span>Можно ли поделиться рецептом?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Да. Рецепт можно отправить текстом, ссылкой, текстом с фото или файлом. Ссылка откроется в Кузинаре и добавит рецепт сама. Принять рецепт можно по ссылке, коду или файлу: «Свой рецепт» и затем «Импорт».</p></div></details>
+<details class="qa"><summary><span>Работает ли Кузинар без интернета?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Да. После первого запуска приложение сохраняет нужные файлы на телефоне, и рецепты открываются без сети.</p></div></details>
+<details class="qa"><summary><span>Как установить приложение на Android?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Скачайте файл <b>.apk</b> со страницы Releases, откройте его на телефоне, разрешите установку из этого источника (Android спросит сам) и нажмите «Установить». Затем запустите Кузинар с экрана приложений.</p></div></details>
+<details class="qa"><summary><span>Безопасно ли ставить APK не из магазина?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Ставьте файл только со страницы Releases официального репозитория этого сайта: другим копиям доверять не стоит. Предупреждение Android о неизвестных источниках появляется для любого приложения вне Google Play. После установки разрешение можно снова отключить в настройках.</p></div></details>
+<details class="qa"><summary><span>Есть ли версия для iPhone?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Пока нет. Сейчас доступна альфа-версия в виде .apk для Android, а в браузере приложение можно открыть на любом устройстве. В планах релизы в App Store, Google Play и RuStore, сроков пока нет.</p></div></details>
+<details class="qa"><summary><span>Что значит «альфа-версия»?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Это ранний тест: основа уже работает, но возможны ошибки, а функции и внешний вид будут меняться. Если что-то сломалось или неудобно, напишите об этом.</p></div></details>
+<details class="qa"><summary><span>Где сообщить об ошибке или предложить идею?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Откройте обращение в разделе <a href="https://github.com/artitionoff/artitionoff.github.io/issues">Issues</a> репозитория на GitHub: опишите, что произошло, на каком телефоне и в какой версии.</p></div></details>
+<details class="qa"><summary><span>Будут ли видео к рецептам?</span><i aria-hidden="true"></i></summary><div class="ans"><p>Фото к своим рецептам уже можно добавлять. Короткие видео мы обдумываем, но в альфе их нет.</p></div></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Кузинар. Приложение в альфа-версии.</span>
+    <nav aria-label="Ссылки">
+      <a href="https://github.com/artitionoff/artitionoff.github.io/releases">Releases</a>
+      <a href="https://github.com/artitionoff/artitionoff.github.io/issues">Сообщить об ошибке</a>
+      <a href="../app/">Веб-версия</a>
+      <a href="https://github.com/artitionoff/artitionoff.github.io">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+/* ───── Тема (ключ cz_theme общий с приложением) ───── */
+(function () {
+  var root = document.documentElement, btn = document.getElementById('tt');
+  function apply(dark) {
+    root.setAttribute('data-theme', dark ? 'dark' : 'light');
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', dark ? '#1c3d27' : '#2e6b3f');
+  }
+  apply(root.getAttribute('data-theme') === 'dark');
+  btn.addEventListener('click', function () {
+    var dark = root.getAttribute('data-theme') !== 'dark';
+    apply(dark);
+    try { localStorage.setItem('cz_theme', dark ? 'dark' : 'light'); } catch (e) {}
+  });
+})();
+
+/* ───── Плавное появление блоков при прокрутке ───── */
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (list) {
+    list.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); e.target.classList.remove('js-off'); io.unobserve(e.target); }
+    });
+  }, { threshold: .12 });
+  els.forEach(function (el) { el.classList.add('js-off'); io.observe(el); });
+})();
+
+/* ───── Последний релиз с GitHub ─────
+   Читаем список релизов, а не /releases/latest: «latest» не видит пре-релизы,
+   а альфа обычно помечается именно так. При ошибке кнопки ведут на страницу Releases. */
+(function () {
+  var REPO = 'artitionoff/artitionoff.github.io';
+  var links = document.querySelectorAll('[data-apk]');
+  var labels = document.querySelectorAll('[data-apk-label]');
+  var heroMeta = document.getElementById('hero-meta');
+  var relMeta = document.getElementById('rel-meta');
+  function note(t) { if (relMeta) relMeta.textContent = t; }
+
+  fetch('https://api.github.com/repos/' + REPO + '/releases?per_page=10', { headers: { 'Accept': 'application/vnd.github+json' } })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (list) {
+      var rel = null, apk = null;
+      for (var i = 0; i < list.length && !apk; i++) {
+        if (list[i].draft) continue;
+        var a = list[i].assets || [];
+        for (var j = 0; j < a.length; j++) if (/\.apk$/i.test(a[j].name)) { rel = list[i]; apk = a[j]; break; }
+      }
+      if (!apk) { note('Первый релиз ещё готовится. Загляните на страницу Releases чуть позже.'); return; }
+      var ver = rel.tag_name || rel.name || '';
+      var mb = (apk.size / 1048576).toFixed(1).replace('.', ',') + ' МБ';
+      var date = new Date(rel.published_at).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+      links.forEach(function (l) { l.href = apk.browser_download_url; });
+      labels.forEach(function (s) { s.textContent = 'Скачать APK ' + ver; });
+      if (heroMeta) heroMeta.textContent = 'Версия ' + ver + ' · ' + mb + ' · Android';
+      note('Версия ' + ver + ', ' + mb + ', выпущена ' + date + '.');
+    })
+    .catch(function () { note('Не удалось проверить версию. Кнопка ведёт на страницу Releases.'); });
+})();
+</script>
+</body>
+</html>
